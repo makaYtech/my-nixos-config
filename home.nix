@@ -9,6 +9,7 @@
     ./home-manager/enviroment_variables.nix
     ./home-manager/theme/gtk.nix
     ./home-manager/theme/qt.nix
+    ./home-manager/vscode/vscode.nix
   ];
 
   home = {
