@@ -17,19 +17,38 @@
       vulkan-loader
     ];
   };
+  networking.firewall.allowedUDPPorts = [ 2080 ]; 
+  programs.throne.tunMode.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  # Use the GRUB 2 boot loader.
-  boot.loader.grub.enable = true;
-  # boot.loader.grub.efiSupport = true;
-  # boot.loader.grub.efiInstallAsRemovable = true;
-  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
-  # Define on which hard drive you want to install Grub.
-  boot.loader.grub.device = "/dev/vda"; # or "nodev" for efi only
 
-  networking.hostName = "nixos"; # Define your hostname.
+  boot.loader.grub.enable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.efiInstallAsRemovable = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  boot.loader.grub.device = "nodev";
+
+  networking.hostName = "nixos";
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
+  virtualisation.libvirtd.enable = true;
+
+  # if you use libvirtd on a desktop environment
+  programs.virt-manager.enable = true;
+  # Обязательно: включаем IP tables для nfqws
+  networking.firewall.enable = true;
+  boot.kernelModules = [ "nfnetlink_queue" ];
+  # services.udev.extraRules = ''
+  #   ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="0bda", ATTRS{idProduct}=="c811", ATTR{power/control}="on"
+  # '';
+  # boot.blacklistedKernelModules = [ 
+  #   "rtw88_8821cu"
+  #   "rtw88_usb"
+  #   "rtw88_core" 
+  # ];
+  # boot.extraModprobeConfig = ''
+  #   options rtw88_8821cu disable_watchdog=1 debug=0
+  # '';
 
   # Set your time zone.
   time.timeZone = "Asia/Yekaterinburg";
@@ -40,51 +59,26 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-  #  console = {
-  #    font = "nerd-fonts.jetbrains-mono";
-  #    keyMap = "us";
-  #    useXkbConfig = true; # use xkb.options in tty.
-  #  };
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
   security.polkit.enable = true;
   programs.sway.enable = true;
 
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+  };
 
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  # services.pulseaudio.enable = true;
-  # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   programs.zsh.enable = true;
   users.users.maka = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "input" "networkmanager" ];
+    extraGroups = [ "wheel" "input" "networkmanager" "libvirtd" ];
     packages = with pkgs; [
       tree
    ];
   };
 
-  # programs.firefox.enable = true;
-
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     wget
     home-manager
     nerd-fonts.jetbrains-mono

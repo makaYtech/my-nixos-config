@@ -30,6 +30,7 @@
           always = true;
         }
       ];
+      window.titlebar = false;
 
       input = {
         "type:keyboard" = {
@@ -38,15 +39,29 @@
         };
       };
 
+      output = {
+        "DP-3" = {
+          mode = "2560x1440@120Hz";
+          scale = "1.0";
+          position = "1920 0";
+        };
+        "HDMI-A-4" = {
+          mode = "1920x1080@100Hz";
+          scale = "1.0";
+          position = "0 0";
+        };
+      };
+
       keybindings = {
         "Mod4+q" = "exec ${pkgs.alacritty}/bin/alacritty";
         "Mod4+r" = "exec ${pkgs.wofi}/bin/wofi --allow-images --show drun --columns 3 -s ~/.config/wofi/style.css";
         "Mod4+c" = "kill";
+        "Mod4+Tab" = "exec alacritty -e btop";
         "Mod4+Shift+c" = "reload";
         "Mod4+Shift+e" = "exec swaymsg exit";
         "Mod4+Shift+m" = "exec ${pkgs.pcmanfm}/bin/pcmanfm";
         "Mod4+p" = "exec ${pkgs.vscodium}/bin/codium";
-        "Mod4+b" = "exec ${pkgs.firefox}/bin/firefox";
+        "Mod4+b" = "exec ${pkgs.librewolf}/bin/librewolf";
         "Mod4+v" = "exec cliphist list | wofi --dmenu --allow-images | cliphist decode | wl-copy";
         "Mod4+Shift+Print" = "exec slurp | grim -g - - | wl-copy";
 
@@ -95,6 +110,16 @@
         "Mod4+Shift+Control+9" = "move container to workspace number 19";
         "Mod4+Shift+Control+0" = "move container to workspace number 20";
       };
+
+      workspaceOutputAssign =
+      (builtins.genList (i: {
+        workspace = toString (i + 1);
+        output = "DP-3";
+      }) 10) ++
+      (builtins.genList (i: {
+        workspace = toString (i + 11);
+        output = "HDMI-A-4";
+      }) 10);
 
       bars = [];
     };

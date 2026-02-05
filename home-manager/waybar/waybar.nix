@@ -8,11 +8,23 @@
         layer = "top";
         position = "top";
         height = 30;
-        modules-left = [ "sway/workspaces" "sway/window" ];
+        modules-left = [ "sway/workspaces" ];
         modules-center = [ "clock" ];
         modules-right = [ "sway/language" "pulseaudio" "network" "tray" ];
         "sway/window" = { max-length = 40; };
-        clock = { format = "{:%H:%M}"; };
+        "tray" = { "spacing" = 10; };
+        "network" = { 
+          "format" = "{icon} {signalStrength}%";
+          "format-disconnected" = "󰖪 Disconnected";
+          "format-icons" = [ "󰣴 " "󰣶 " "󰣸 " "󰣺 " "󰣾 " ];
+          "tooltip-format" = "{ipaddr} via {essid}";
+        };
+        "pulseaudio" = {
+          "on-click" = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
+          "on-scroll-up" = "pactl set-sink-volume @DEFAULT_SINK@ +5%";
+          "on-scroll-down" = "pactl set-sink-volume @DEFAULT_SINK@ -5%";
+        };
+        clock = { format = "{:%H:%M}";};
       };
     };
 
@@ -88,7 +100,6 @@
         padding: 5px;
         font-size: 20px;
         font-weight: bold;
-        margin-right: 500px;
       }
 
       #clock:hover {

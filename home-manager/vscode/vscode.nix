@@ -1,15 +1,18 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
 
-    extansions = with pkgs.vscode-extensions; [
-      jnoortheen.nix-ide
-      mhutchie.git-graph
-    ];
+    profiles.default = {
+      extensions = with pkgs.vscode-extensions; [
+        mhutchie.git-graph
+        jnoortheen.nix-ide
+      ];
+    
 
-    userSettings = {
-      "editor.tabSize" = 2;
+      userSettings = {
+        "editor.tabSize" = 2;
+      };
     };
   };
 }
