@@ -41,4 +41,11 @@
     gtk-application-prefer-dark-theme=1
     gtk-font-name=Cantarell 11
   '';
+  programs.git = {
+    enable = true;
+    settings.user = {
+      name = "makaYtech";
+      email = "mmaka9322@gmail.com";
+    };
+  };
 }
