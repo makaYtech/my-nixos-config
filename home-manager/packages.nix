@@ -47,5 +47,7 @@
     wine
     libreoffice
     gimp
+    adwaita-qt
+    adwaita-icon-theme
   ];
 }

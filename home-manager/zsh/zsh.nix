@@ -7,6 +7,8 @@
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch";
       rebuildHM = "home-manager switch";
+      flakeHome = "home-manager switch --flake ~/my-nixos-config/#maka";
+      flakeNix = "sudo nixos-rebuild switch --flake ~/my-nixos-config/#nixos";
     };
     plugins = [
       {

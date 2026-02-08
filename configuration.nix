@@ -59,6 +59,7 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+  fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono];
   security.polkit.enable = true;
   programs.sway.enable = true;
 
@@ -82,8 +83,6 @@
     wget
     home-manager
     nerd-fonts.jetbrains-mono
-    adwaita-qt
-    adwaita-icon-theme
     git
   ];
 

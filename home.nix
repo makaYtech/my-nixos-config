@@ -1,6 +1,7 @@
 { config, pkgs, ... }: {
   imports = [
     ./home-manager/packages.nix
+    ./home-manager/sway/keybinds.nix
     ./home-manager/sway/sway.nix
     ./home-manager/zsh/zsh.nix
     ./home-manager/waybar/waybar.nix
@@ -17,4 +18,27 @@
     homeDirectory = "/home/maka";
     stateVersion = "25.11";
   };
+
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+        gtk-theme = "Adwaita-dark";
+        icon-theme = "Adwaita";
+        cursor-theme = "Adwaita";
+        font-name = "JetBrainsMono Nerd Font 10";
+      };
+      "org/gnome/desktop/wm/preferences" = {
+        theme = "Adwaita";
+      };
+    };
+  };
+  xdg.configFile."gtk-3.0/settings.ini".text = ''
+    [Settings]
+    gtk-theme-name=Adwaita
+    gtk-icon-theme-name=Adwaita
+    gtk-application-prefer-dark-theme=1
+    gtk-font-name=Cantarell 11
+  '';
 }

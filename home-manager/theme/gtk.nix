@@ -9,6 +9,10 @@
       name = "Adwaita";
       package = pkgs.adwaita-icon-theme;
     };
+    cursorTheme = {
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
+    };
     font = {
       name = "JetBrainsMono Nerd Font";
       size = 10;

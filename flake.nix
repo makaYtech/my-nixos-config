@@ -44,14 +44,14 @@
         ];
       };
 
-      # homeConfiguration.${user} = home-manager.lib.homeManagerConfiguration {
-      #   pkgs = nixpkgs.legacyPackages.${system};
-      #   extraSpecialArgs = {
-      #     inherit inputs homeStatrVersion user;
-      #   };
-      # };
-      # modules = [
-      #   ./home.nix
-      # ];
+      homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
+        extraSpecialArgs = {
+          inherit inputs user;
+        };
+        modules = [
+          ./home.nix
+        ];
+      };
     };
 }
