@@ -24,7 +24,6 @@
     polkit_gnome
     pcmanfm
     vscodium
-    firefox
     nix-zsh-completions
     zsh-powerlevel10k
     cliphist
