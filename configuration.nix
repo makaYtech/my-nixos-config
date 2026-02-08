@@ -84,6 +84,7 @@
     home-manager
     nerd-fonts.jetbrains-mono
     git
+    killall
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

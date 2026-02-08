@@ -1,14 +1,14 @@
 { pkgs, ... }: {
   wayland.windowManager.sway.config.keybindings = {
-    "Mod4+q" = "exec ${pkgs.alacritty}/bin/alacritty";
-    "Mod4+r" = "exec ${pkgs.wofi}/bin/wofi --allow-images --show drun --columns 3 -s ~/.config/wofi/style.css";
+    "Mod4+q" = "exec alacritty";
+    "Mod4+r" = "exec wofi --allow-images --show drun --columns 3 -s ~/.config/wofi/style.css";
     "Mod4+c" = "kill";
     "Mod4+Tab" = "exec alacritty -e btop";
     "Mod4+Shift+c" = "reload";
     "Mod4+Shift+e" = "exec swaymsg exit";
-    "Mod4+Shift+m" = "exec ${pkgs.pcmanfm}/bin/pcmanfm";
-    "Mod4+p" = "exec ${pkgs.vscodium}/bin/codium";
-    "Mod4+b" = "exec ${pkgs.librewolf}/bin/librewolf";
+    "Mod4+Shift+m" = "exec alacritty -e yazi";
+    "Mod4+p" = "exec codium";
+    "Mod4+b" = "exec librewolf";
     "Mod4+v" = "exec cliphist list | wofi --dmenu --allow-images | cliphist decode | wl-copy";
     "Mod4+Shift+Print" = "exec slurp | grim -g - - | wl-copy";
 

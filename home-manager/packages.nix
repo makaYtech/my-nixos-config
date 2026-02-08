@@ -48,5 +48,7 @@
     gimp
     adwaita-qt
     adwaita-icon-theme
+    yazi
+    vencord
   ];
 }

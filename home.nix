@@ -11,6 +11,7 @@
     ./home-manager/theme/gtk.nix
     ./home-manager/theme/qt.nix
     ./home-manager/vscode/vscode.nix
+    ./home-manager/yazi/yazi.nix
   ];
 
   home = {
@@ -39,7 +40,7 @@
     gtk-theme-name=Adwaita
     gtk-icon-theme-name=Adwaita
     gtk-application-prefer-dark-theme=1
-    gtk-font-name=Cantarell 11
+    gtk-font-name=JetBrainsMono Nerd Font 10
   '';
   programs.git = {
     enable = true;
