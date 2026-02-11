@@ -1,7 +1,18 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, ... }:
+
+let
+  unstable = import (builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
+    sha256 = "1klgyhj98j3gfsql5sn9rapyx62qk5g8adk5zh9mnc4d0fj61gdr";
+  }) { system = "x86_64-linux"; };
+in
+{
+  nixpkgs.config.allowUnfree = true;
+
   nixpkgs.config.allowUnfreePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "vscode-extension-mhutchie-git-graph"
+      # "rust-lang.rust-analyzer"
       "spotify"
       "steam"
       "steam-original"
@@ -9,6 +20,7 @@
       "steam-run"
       "obsidian"
     ];
+
   home.packages = with pkgs; [
     xdg-desktop-portal-wlr
     xdg-desktop-portal
@@ -36,9 +48,10 @@
     usbutils
     iptables
     usb-modeswitch
-    # spotify
     steam
     p7zip
+    unar
+    winetricks
     librewolf
     obsidian
     iw
@@ -49,6 +62,23 @@
     adwaita-qt
     adwaita-icon-theme
     yazi
-    vencord
+    vesktop
+    heroic
+    proxychains
+    fzf
+    spotify
+    unzip
+    zip
+
+    #development
+    rustc
+    rustPackages.rust-src
+    cargo
+    clippy
+    rustfmt
+  ] ++ [
+    unstable.protonplus
+    unstable.gamemode
+    unstable.gamescope
   ];
 }

@@ -19,6 +19,8 @@
   };
   networking.firewall.allowedUDPPorts = [ 2080 ]; 
   programs.throne.tunMode.enable = true;
+  services.resolved.enable = true;
+  hardware.opengl.driSupport32Bit = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   boot.loader.grub.enable = true;

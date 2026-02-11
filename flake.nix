@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     zapret-discord-youtube.url = "github:kartavkun/zapret-discord-youtube";
+    dw-proton.url = "github:imaviso/dwproton-flake";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -11,17 +12,19 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, zapret-discord-youtube, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, zapret-discord-youtube, dw-proton, ... }@inputs:
     let 
       system = "x86_64-linux";
       hostname = "nixos";
       homeStatrVersion = "25.11";
       user = "maka";
+      
     in {
       nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [ 
           ./configuration.nix
+          { nixpkgs.config.allowUnfree = true; }
           zapret-discord-youtube.nixosModules.default
             {
               services.zapret-discord-youtube = {
